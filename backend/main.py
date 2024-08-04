@@ -13,6 +13,22 @@ Session(app)
 @app.route('/')
 def index():
     return render_template('index.html')
+    
+@app.route('/entrar')
+def entrar():
+    pass
+
+@app.route('/logout')
+def logout():
+    pass
+
+@app.route('/dashboard')
+def cadastro():
+    pass
+
+@app.route('/login')
+def login():
+    pass
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
