@@ -12,7 +12,7 @@ Session(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', idade = 17)
     
 @app.route('/entrar')
 def entrar():
