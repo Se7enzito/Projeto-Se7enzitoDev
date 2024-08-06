@@ -78,3 +78,17 @@
 
 
 })(jQuery);
+
+$(document).ready(function() {
+    $('#show-register').on('click', function(e) {
+        e.preventDefault();
+        $('#login-form').hide();
+        $('#register-form').show();
+    });
+
+    $('#show-login').on('click', function(e) {
+        e.preventDefault();
+        $('#register-form').hide();
+        $('#login-form').show();
+    });
+});

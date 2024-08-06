@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask, render_template, redirect, url_for, session, request
 from flask_session import Session
 
 app = Flask(__name__, template_folder="../frontend/templates")
@@ -23,6 +23,23 @@ def login():
         return render_template('login.html')
     
     return render_template('dashboard.html', user=user)
+
+@app.route('/entrar', methods = ['POST'])
+def entrar():
+    if request.method == 'POST':
+        formEmail = request.form.get('email')
+        formPass = request.form.get('password')
+        
+        return f'{formEmail}, {formPass}'
+
+@app.route('/registrar', methods = ['POST'])
+def registrar():
+    if request.method == 'POST':
+        formUser = request.form.get('user')
+        formEmail = request.form.get('email')
+        formPass = request.form.get('password')
+        
+        return f'{formUser}, {formEmail}, {formPass}'
     
 @app.route('/logout')
 def logout():
@@ -69,5 +86,3 @@ def gerenciamento():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
-    
-    # EmailJS para conectar com e-mail
