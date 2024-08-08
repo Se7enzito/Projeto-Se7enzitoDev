@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request
+from flask import Flask, render_template, redirect, url_for, session, request, flash
 from flask_session import Session
 
 app = Flask(__name__, template_folder="../frontend/templates")
@@ -14,7 +14,8 @@ Session(app)
 def index():
     return render_template('index.html', idade = 17)
     
-@app.route('/login')
+# Código com gambiarra, depois olhar
+@app.route('/login', methods = ['POST', 'GET'])
 def login():
     user = session.get('user')
     senha = session.get('senha')
@@ -30,7 +31,12 @@ def entrar():
         formEmail = request.form.get('email')
         formPass = request.form.get('password')
         
-        return f'{formEmail}, {formPass}'
+        # Gambiarra
+        if formEmail == None or formPass == None or formEmail == "" or formPass == "":
+            return redirect(url_for('login'))
+        
+        # Fazer validações
+        return redirect(url_for('dashboard'))
 
 @app.route('/registrar', methods = ['POST'])
 def registrar():
@@ -40,7 +46,7 @@ def registrar():
         formPass = request.form.get('password')
         
         return f'{formUser}, {formEmail}, {formPass}'
-    
+
 @app.route('/logout')
 def logout():
     session.pop('user', None)

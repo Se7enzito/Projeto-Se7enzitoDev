@@ -54,11 +54,12 @@
             <div class="container-login100">
                 <div class="wrap-login100">
                     <!-- Login Form -->
-                    <form class="login100-form validate-form" id="login-form" action="{{ url_for('entrar') }}" method="post">
+                    <!-- Conferir o login não funcionar o validate -->
+                    <form id="login-form" action="{{ url_for('entrar') }}" method="post">
                         <span class="login100-form-title p-b-26">Logar-se</span>
 
                         <div class="wrap-input100 validate-input" data-validate="E-mail válido é: a@b.c">
-                            <input class="input100" type="text" name="email" id="email">
+                            <input class="input100" type="text" name="email" id="login-email">
                             <span class="focus-input100" data-placeholder="Email"></span>
                         </div>
 
@@ -66,7 +67,7 @@
                             <span class="btn-show-pass">
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
-                            <input class="input100" type="password" name="password" id="password">
+                            <input class="input100" type="password" name="password" id="login-password">
                             <span class="focus-input100" data-placeholder="Password"></span>
                         </div>
 
@@ -84,17 +85,16 @@
                         </div>
                     </form>
 
-                    <!-- Register Form -->
                     <form class="login100-form validate-form" id="register-form" style="display: none;" action="{{ url_for('registrar') }}" method="post">
                         <span class="login100-form-title p-b-26">Registrar-se</span>
 
-                        <div class="wrap-input100">
-                            <input class="input100" type="text" name="user" id="user">
+                        <div class="wrap-input100 validate-input" data-validate="Digite um usuário">
+                            <input class="input100" type="text" name="user" id="register-user">
                             <span class="focus-input100" data-placeholder="User"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="E-mail válido é: a@b.c">
-                            <input class="input100" type="text" name="email" id="email">
+                            <input class="input100" type="text" name="email" id="register-email">
                             <span class="focus-input100" data-placeholder="Email"></span>
                         </div>
 
@@ -102,7 +102,7 @@
                             <span class="btn-show-pass">
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
-                            <input class="input100" type="password" name="password" id="password">
+                            <input class="input100" type="password" name="password" id="register-password">
                             <span class="focus-input100" data-placeholder="Password"></span>
                         </div>
 
