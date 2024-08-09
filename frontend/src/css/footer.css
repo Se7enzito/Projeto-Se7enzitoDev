@@ -1,0 +1,10 @@
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+footer a {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: bold;
+}

@@ -45,7 +45,8 @@ def registrar():
         formEmail = request.form.get('email')
         formPass = request.form.get('password')
         
-        return f'{formUser}, {formEmail}, {formPass}'
+        # Fazer validações
+        return redirect(url_for('dashboard'))
 
 @app.route('/logout')
 def logout():
