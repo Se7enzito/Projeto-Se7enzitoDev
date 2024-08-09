@@ -48,19 +48,19 @@
                     {% endif %}
                     {% if perm >= 2 %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Marcar aula</a>
+                        <a class="nav-link" href="{{ url_for('') }}">Marcar aula</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Aulas anteriores</a>
+                        <a class="nav-link" href="{{ url_for('') }}">Aulas anteriores</a>
                     </li>
                     {% endif %}
                     {% if perm == 1 %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Fazer proposta</a>
+                        <a class="nav-link" href="{{ url_for('') }}">Fazer proposta</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Trocar meu acesso</a>
+                        <a class="nav-link" href="{{ url_for('') }}">Trocar meu acesso</a>
                     </li>
                 </ul>
                 
@@ -74,6 +74,33 @@
     </header>
 
     <main>
+        <div>
+            <h1>Minhas notificações</h1>
+
+            <div>
+                <!-- Lista de notificações -->
+            </div>
+        </div>
+
+        {% if perm >= 2 %}
+        <div>
+            <h1>Minhas próximas aulas</h1>
+
+            <div>
+                <!-- Lista de aulas marcas -->
+            </div>
+        </div>
+        {% endif %}
+
+        {% if perm == 1 %}
+        <div>
+            <h1>Retorno de propostas</h1>
+
+            <div>
+                <!-- Lista com retorno sobre propostas e orçamentos -->
+            </div>
+        </div>
+        {% endif %}
     </main>
 
     <footer class="d-flex flex-column gap-5 align-items-center justify-content-center text-center">
