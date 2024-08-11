@@ -21,11 +21,12 @@ def decrypt_message(encrypted_message):
     decrypted_message = f.decrypt(encrypted_message)
     return decrypted_message.decode()
 
-generate_key()
+if __name__ == '__main__':
+    generate_key()
 
-message = "Minha mensagem secreta"
-encrypted = encrypt_message(message)
-print(f"Mensagem Criptografada: {encrypted}")
+    message = "Minha mensagem secreta"
+    encrypted = encrypt_message(message)
+    print(f"Mensagem Criptografada: {encrypted}")
 
-decrypted = decrypt_message(encrypted)
-print(f"Mensagem Descriptografada: {decrypted}")
+    decrypted = decrypt_message(encrypted)
+    print(f"Mensagem Descriptografada: {decrypted}")
