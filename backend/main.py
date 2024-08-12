@@ -1,7 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, session, request, flash
+from flask import Flask, render_template, redirect, url_for, session, request
 from flask_session import Session
 from libs.db.dbAPI import GerenData
-from backend.libs.funcs.systemCripto import generate_key
+from libs.funcs.systemCripto import generate_key
 
 app = Flask(__name__, template_folder="../frontend/templates")
 
@@ -11,6 +11,8 @@ app.static_url_path = '/static'
 app.config['SECRET_KEY'] = 'supersecretkey'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
+
+gerenData = GerenData()
 
 @app.route('/')
 def index():
@@ -37,8 +39,12 @@ def entrar():
         if formEmail == None or formPass == None or formEmail == "" or formPass == "":
             return redirect(url_for('login'))
         
-        # Fazer validações
-        return redirect(url_for('dashboard'))
+        loginOk = gerenData.confirmLogin(formEmail, formPass)
+        
+        if loginOk:
+            return redirect(url_for('dashboard'))
+        else:
+            return redirect(url_for('login'))
 
 @app.route('/registrar', methods = ['POST'])
 def registrar():
@@ -95,5 +101,7 @@ def gerenciamento():
 
 if __name__ == '__main__':
     generate_key()
+    
+    gerenData.criarTabelas()
     
     app.run(host='127.0.0.1', port=8000, debug=True)
