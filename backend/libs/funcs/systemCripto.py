@@ -16,22 +16,22 @@ def ensure_key_exists():
 def encrypt_message(message):
     ensure_key_exists()
     key = load_key()
-    print(f"Key used for encryption: {key}")
+    # print(f"Key used for encryption: {key}")
     encoded_message = message.encode()
     f = Fernet(key)
     encrypted_message = f.encrypt(encoded_message)
-    print(f"Encrypted message: {encrypted_message}")
+    # print(f"Encrypted message: {encrypted_message}")
     return encrypted_message
 
 def decrypt_message(encrypted_message):
     ensure_key_exists()
     key = load_key()
-    print(f"Key used for decryption: {key}")
-    print(f"Encrypted message before decryption: {encrypted_message}")
+    # print(f"Key used for decryption: {key}")
+    # print(f"Encrypted message before decryption: {encrypted_message}")
     f = Fernet(key)
     try:
         decrypted_message = f.decrypt(encrypted_message)
-        print(f"Decrypted message: {decrypted_message.decode()}")
+        # print(f"Decrypted message: {decrypted_message.decode()}")
         return decrypted_message.decode()
     except Exception as e:
         print(f"Decryption failed: {e}")
