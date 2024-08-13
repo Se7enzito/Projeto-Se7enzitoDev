@@ -56,7 +56,6 @@ def registrar():
         formEmail = request.form.get('email')
         formPass = request.form.get('password')
         
-        # Fazer validações
         if formUser == None or formEmail == None or formPass == None or formEmail == "" or formUser == "" or formPass == "":
             return redirect(url_for('login'))
         
@@ -86,8 +85,8 @@ def dashboard():
     
     return render_template('dashboard.html', user=user)
 
-@app.route('/contratar')
-def contratar():
+@app.route('/marcar_aula')
+def marcar_aula():
     user = session.get('user')
     
     if user == None:
@@ -95,8 +94,26 @@ def contratar():
     
     pass
 
-@app.route('/saber_mais')
-def saber_mais():
+@app.route('/aulas_anteriores')
+def aulas_anteriores():
+    user = session.get('user')
+    
+    if user == None:
+        pass
+    
+    pass
+
+@app.route('/acesso')
+def acesso():
+    user = session.get('user')
+    
+    if user == None:
+        pass
+    
+    pass
+
+@app.route('/contratar')
+def contratar():
     user = session.get('user')
     
     if user == None:

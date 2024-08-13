@@ -48,19 +48,19 @@
                     {% endif %}
                     {% if perm >= 2 %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('') }}">Marcar aula</a>
+                        <a class="nav-link" href="{{ url_for('marcar_aula') }}">Marcar aula</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('') }}">Aulas anteriores</a>
+                        <a class="nav-link" href="{{ url_for('aulas_anteriores') }}">Aulas anteriores</a>
                     </li>
                     {% endif %}
                     {% if perm == 1 %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('') }}">Fazer proposta</a>
+                        <a class="nav-link" href="{{ url_for('contratar') }}">Fazer proposta</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('') }}">Trocar meu acesso</a>
+                        <a class="nav-link" href="{{ url_for('acesso') }}">Trocar meu acesso</a>
                     </li>
                 </ul>
                 
