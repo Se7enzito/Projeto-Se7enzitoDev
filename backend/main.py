@@ -18,7 +18,6 @@ gerenData = GerenData()
 def index():
     return render_template('index.html', idade = 17)
     
-# Código com gambiarra, depois olhar
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
     user = session.get('user')
@@ -35,7 +34,6 @@ def entrar():
         formEmail = request.form.get('email')
         formPass = request.form.get('password')
         
-        # Gambiarra
         if formEmail == None or formPass == None or formEmail == "" or formPass == "":
             return redirect(url_for('login'))
         
@@ -54,7 +52,15 @@ def registrar():
         formPass = request.form.get('password')
         
         # Fazer validações
-        return redirect(url_for('dashboard'))
+        if formUser == None or formEmail == None or formPass == None or formEmail == "" or formUser == "" or formPass == "":
+            return redirect(url_for('login'))
+        
+        retorno = gerenData.criarUser(formUser, formEmail, formUser)
+        
+        if retorno == "Utilizador criado com sucesso.":
+            return redirect(url_for('dashboard'))
+        else:
+            return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
