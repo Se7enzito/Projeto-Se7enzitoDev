@@ -112,8 +112,23 @@ class GerenData():
             self.desconectar()
             
             return "Utilizador criado com sucesso."
+    
+    def getUser(self, email: str) -> str:
+        self.conectar()
+        emailCript = encrypt_message(email)
+        
+        user = self.cursor.execute("SELECT * FROM users WHERE email=?", (emailCript,)).fetchone()
+        
+        self.desconectar()
+        
+        if user:
+            userUncript = decrypt_message(user[0])
             
-    def getUser(self, user: str) -> list:
+            return userUncript
+        else:
+            return []
+    
+    def getUserInfos(self, user: str) -> list:
         self.conectar()
         userCript = encrypt_message(user)
         

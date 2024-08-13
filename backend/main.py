@@ -20,13 +20,15 @@ def index():
     
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
-    user = session.get('user')
+    email = session.get('email')
     senha = session.get('senha')
     
-    if user == None or senha == None:
+    if email == None or senha == None:
         return render_template('login.html')
     
-    return render_template('dashboard.html', user=user)
+    dados = gerenData.getUserInfos(email)
+    
+    return render_template('dashboard.html', user=dados[0])
 
 @app.route('/entrar', methods = ['POST'])
 def entrar():
@@ -38,6 +40,9 @@ def entrar():
             return redirect(url_for('login'))
         
         loginOk = gerenData.confirmLogin(formEmail, formPass)
+        
+        session['email'] = formEmail
+        session['senha'] = formPass
         
         if loginOk:
             return redirect(url_for('dashboard'))
@@ -56,6 +61,9 @@ def registrar():
             return redirect(url_for('login'))
         
         retorno = gerenData.criarUser(formUser, formEmail, formUser)
+        
+        session['email'] = formEmail
+        session['senha'] = formPass
         
         if retorno == "Utilizador criado com sucesso.":
             return redirect(url_for('dashboard'))
