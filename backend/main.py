@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, session, request
 from flask_session import Session
 from libs.db.dbAPI import GerenData
-from libs.funcs.systemCripto import generate_key
+from libs.funcs.systemCripto import ensure_key_exists, load_key
 
 app = Flask(__name__, template_folder="../frontend/templates")
 
@@ -99,9 +99,10 @@ def gerenciamento():
     
     return redirect(url_for('index'))
 
-if __name__ == '__main__':
-    generate_key()
+if __name__ == '__main__':    
+    ensure_key_exists()
+    key = load_key()
     
     gerenData.criarTabelas()
     
-    app.run(host='127.0.0.1', port=8000, debug=True)
+    app.run(debug=True, port=8000)

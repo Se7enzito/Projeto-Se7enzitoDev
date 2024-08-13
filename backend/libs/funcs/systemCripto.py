@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+import os
 
 def generate_key():
     key = Fernet.generate_key()
@@ -8,25 +9,33 @@ def generate_key():
 def load_key():
     return open("backend/libs/funcs/secret.key", "rb").read()
 
+def ensure_key_exists():
+    if not os.path.exists("backend/libs/funcs/secret.key"):
+        generate_key()
+
 def encrypt_message(message):
+    ensure_key_exists()
     key = load_key()
+    print(f"Key used for encryption: {key}")
     encoded_message = message.encode()
     f = Fernet(key)
     encrypted_message = f.encrypt(encoded_message)
+    print(f"Encrypted message: {encrypted_message}")
     return encrypted_message
 
 def decrypt_message(encrypted_message):
+    ensure_key_exists()
     key = load_key()
+    print(f"Key used for decryption: {key}")
+    print(f"Encrypted message before decryption: {encrypted_message}")
     f = Fernet(key)
-    decrypted_message = f.decrypt(encrypted_message)
-    return decrypted_message.decode()
+    try:
+        decrypted_message = f.decrypt(encrypted_message)
+        print(f"Decrypted message: {decrypted_message.decode()}")
+        return decrypted_message.decode()
+    except Exception as e:
+        print(f"Decryption failed: {e}")
+        raise
 
-if __name__ == '__main__':
-    generate_key()
-
-    message = "Minha mensagem secreta"
-    encrypted = encrypt_message(message)
-    print(f"Mensagem Criptografada: {encrypted}")
-
-    decrypted = decrypt_message(encrypted)
-    print(f"Mensagem Descriptografada: {decrypted}")
+if __name__ == "__main__":
+    pass
