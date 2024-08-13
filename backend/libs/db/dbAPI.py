@@ -128,11 +128,11 @@ class GerenData():
         else:
             return []
     
-    def getUserInfos(self, user: str) -> list:
+    def getUserInfos(self, email: str) -> list:
         self.conectar()
-        userCript = encrypt_message(user)
+        emailCript = encrypt_message(email)
         
-        user = self.cursor.execute("SELECT * FROM users WHERE user=?", (userCript,)).fetchone()
+        user = self.cursor.execute("SELECT * FROM users WHERE email=?", (emailCript,)).fetchone()
         
         self.desconectar()
         
@@ -164,12 +164,26 @@ class GerenData():
             return False
             
     # Serviços
+    def getServicos(self) -> list:
+        pass
+    
+    def getServicoId(self, id: int) -> list:
+        pass
     
     # Notificações
+    def getNotificacoes(self, user: str) -> list:
+        pass
     
     # Aulas
+    def getAulas(self, user: str) -> list:
+        pass
     
     # Propostas
+    def getPropostas(self, user: str) -> list:
+        pass
+    
+    def getRespostas(self, user: str) -> list:
+        pass
 
 if __name__ == "__main__":
     pass

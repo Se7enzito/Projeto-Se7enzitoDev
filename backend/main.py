@@ -78,57 +78,85 @@ def logout():
 
 @app.route('/dashboard')
 def dashboard():
-    user = session.get('user')
+    email = session.get('email')
     
-    if user == None:
+    if email == None:
         return redirect(url_for('login'))
     
-    return render_template('dashboard.html', user=user)
+    dados = gerenData.getUserInfos(email)
+    
+    user = gerenData.getUser(email)
+    
+    notificacoes = gerenData.getNotificacoes(user)
+    aulas = gerenData.getAulas(user)
+    propostas  = gerenData.getPropostas(user)
+    
+    return render_template('dashboard.html', user=dados[0], perm=dados[3], notificacoes=notificacoes, aulas=aulas, propostas=propostas)
 
 @app.route('/marcar_aula')
 def marcar_aula():
-    user = session.get('user')
+    email = session.get('email')
     
-    if user == None:
-        pass
+    if email == None:
+        return redirect(url_for('login'))
     
     pass
 
 @app.route('/aulas_anteriores')
 def aulas_anteriores():
-    user = session.get('user')
+    email = session.get('email')
     
-    if user == None:
-        pass
+    if email == None:
+        return redirect(url_for('login'))
     
     pass
 
 @app.route('/acesso')
 def acesso():
-    user = session.get('user')
+    email = session.get('email')
     
-    if user == None:
-        pass
+    if email == None:
+        return redirect(url_for('login'))
     
     pass
 
 @app.route('/contratar')
 def contratar():
-    user = session.get('user')
+    email = session.get('email')
     
-    if user == None:
-        pass
+    if email == None:
+        return redirect(url_for('login'))
     
     pass
 
 @app.route('/gerenciamento')
 def gerenciamento():
-    user = session.get('user')
+    email = session.get('email')
     
-    if user == 'Se7enzitoDev':
-        return render_template('gerenciamento.html', user=user)
+    if email == 'Se7enzitoDev':
+        dados = gerenData.getUserInfos(email)
+        
+        return render_template('gerenciamento.html', user=dados[0])
     
     return redirect(url_for('index'))
+
+@app.route('/servicos')
+def servicos():
+    pass
+
+@app.route('/servicos/<int:id>')
+def servicos(id):
+    servico = gerenData.getServicoId(id)
+    
+    if servico is None:
+        return f"Serviço com ID {id} não encontrado.", 404
+    
+    # Fazer configuração do site
+    return f'Serviço de ID {id}'
+
+@app.route('/portfolio')
+def portfolio():
+    pass
 
 if __name__ == '__main__':    
     ensure_key_exists()
